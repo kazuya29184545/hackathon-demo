@@ -1,4 +1,4 @@
-
+let fileName = ""
 
 
 const bucketName = "rekognition-kazuya";
@@ -18,6 +18,15 @@ const s3 = new AWS.S3({
 });
 
 
+function previewImage(obj) {
+    console.log(preview)
+	var fileReader = new FileReader();
+	fileReader.onload = (function() {
+		document.getElementById('preview').src = fileReader.result;
+	});
+	fileReader.readAsDataURL(obj.files[0]);
+}
+
 //User input photo
 function addPhoto() {
     let files = document.getElementById("chooseFile").files;
@@ -26,7 +35,7 @@ function addPhoto() {
   }
   
   var file = files[0];
-  var fileName = file.name;
+  fileName = file.name;
 
   // Use S3 ManagedUpload class as it supports multipart uploads
   let upload = new AWS.S3.ManagedUpload({
@@ -48,8 +57,6 @@ function addPhoto() {
       return alert("There was an error uploading your photo: ", err.message);
     }
   );
-  console.log(fileName);
-  console.log(promise);
 }
 
 // Delete the photo
@@ -77,8 +84,8 @@ deleteButton.addEventListener('click', () => {
 
 // Call APIGW
 async function callAPIGW() {
-    const res = await fetch("https://4jo70ixtdk.execute-api.us-west-2.amazonaws.com/prod/?s3key=fileName");
-    const apigw = await res.jdon();
+    const res = await fetch("https://4jo70ixtdk.execute-api.us-west-2.amazonaws.com/prod/?s3key=" + fileName);
+    const apigw = await res.json();
     console.log(apigw)
 }
 

@@ -15,7 +15,10 @@
   <body>
     <h1>Find Your Actor</h1>
     <div id="app">
-        <input id="chooseFile" type="file" accept="image/*">
+        <!-- <form>
+            <input id="chooseFile" type="file" accept="image/*" onchange="previewImage(this);">
+        </form> -->
+        <!-- <div id="preview"></div> -->
         <button value="button" id="uploadPhoto" type="file" accept="image/*">
             Upload
         </button>
@@ -25,6 +28,10 @@
         <button value="button" id="callAPIGW">
             Find Movies
         </button>
+        <p>
+            Preview:<br>
+            <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
+        </p>
         
     </div>
     <script src="./main.js"></script>
