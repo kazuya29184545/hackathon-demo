@@ -1,5 +1,5 @@
 let fileName = ""
-
+let movieTitle = ""
 
 const bucketName = "rekognition-kazuya";
 const bucketRegion = "us-west-2";
@@ -60,14 +60,14 @@ function addPhoto() {
 }
 
 // Delete the photo
-function deletePhoto(fileName) {
-    s3.deleteObject({ Bucket: bucketName, Key: fileName }, function(err, data) {
-      if (err) {
-        return alert("There was an error deleting your photo: ", err.message);
-      }
-      alert("Successfully deleted photo.");
-    });
-  }
+// function deletePhoto(fileName) {
+//     s3.deleteObject({ Bucket: bucketName, Key: fileName }, function(err, data) {
+//       if (err) {
+//         return alert("There was an error deleting your photo: ", err.message);
+//       }
+//       alert("Successfully deleted photo.");
+//     });
+//   }
   
 
 const uploadButton = document.getElementById("uploadPhoto");
@@ -82,11 +82,37 @@ deleteButton.addEventListener('click', () => {
 });
 
 
-// Call APIGW
+// Makihg function for calling APIGW
 async function callAPIGW() {
     const res = await fetch("https://4jo70ixtdk.execute-api.us-west-2.amazonaws.com/prod/?s3key=" + fileName);
     const apigw = await res.json();
-    console.log(apigw)
+    console.log(apigw);
+    const title = document.getElementById("result-title");
+    // const image = document.getElementById("result-image");
+    // for (i=0; i<3; i++) {
+    //   title.innerHTML = JSON.stringify(apigw[i].description.split(/[,)]/)[2]);
+    //   // image.src = JSON.stringify(apigw[i].image)
+      
+    // }
+    title.innerHTML = JSON.stringify(apigw[0].description.split(/[,)]/)[2]);
+    console.log(title.innerHTML + ")")
+    let movieTitle = title.innerHTML.slice(1, -1) + ")"
+    title.innerHTML = movieTitle;
+    // movieTitle = title.innerHTML;
+    // console.log(movieTitle)
+
+}
+
+//Youtube API for trailors
+const apikey = "AIzaSyDH66hDu98Sbi0W5BsUfIBS2k5uRo6ZOgg"
+
+const callYtbApi = async() => {
+  const res = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q=The Mortal Instruments: City of Bones (2013 trailor&type=video&videoEmbeddable=true&regionCode=US&key=" + apikey);
+  const resJson = await res.json();
+  console.log(resJson);
+  const youtube = document.getElementById("youtube");
+  const iframeSrc = 'https://www.youtube.com/embed/' + resJson.items[0].id.videoId;
+  youtube.setAttribute('src', iframeSrc);
 }
 
 const APIGWButton = document.getElementById("callAPIGW")
@@ -94,3 +120,5 @@ const APIGWButton = document.getElementById("callAPIGW")
 APIGWButton.addEventListener("click", () => {
     callAPIGW();
 })
+
+callYtbApi()
