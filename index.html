@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <!-- **DO THIS**: -->
+    <!--   Replace SDK_VERSION_NUMBER with the current SDK version number -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1210.0.min.js"></script>
+    
+    <script>
+       function getHtml(template) {
+          return template.join('\n');
+       }
+       
+    </script>
+  </head>
+  <body>
+    <h1>Find Your Actor</h1>
+    <div id="app">
+        <form>
+            <input id="chooseFile" type="file" accept="image/*" onchange="previewImage(this);">
+        </form>
+        <p>
+            Preview:<br>
+            <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
+        </p> 
+        <!-- <div id="preview"></div> -->
+        <button value="button" id="uploadPhoto" type="file" accept="image/*">
+            Upload
+        </button>
+        <button value="button" id="deletePhoto">
+            Delete
+        </button>
+        <button value="button" id="callAPIGW">
+            Find Movies
+        </button>
+        
+             
+    </div>
+    <div id="result-title"></div>
+    <img id="result-image" src="" alt="">
+    <iframe id="youtube" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <button id="recommend">Recommend for you</button>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

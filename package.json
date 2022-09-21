@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1210.0",
+    "node-fetch": "^3.2.10"
+  },
+  "type": "module",
+  "name": "hackathon-demo",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuya29184545/hackathon-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazuya29184545/hackathon-demo/issues"
+  },
+  "homepage": "https://github.com/kazuya29184545/hackathon-demo#readme"
+}
